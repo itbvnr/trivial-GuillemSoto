@@ -8,16 +8,24 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHost
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import m78exercices.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun Screen1(navigateToGameScreen: ()-> Unit, navigateToSettingScreen: ()-> Unit){
+fun MenuScreen(navController: NavHostController){
     Box(modifier = Modifier.fillMaxSize()){
         Column {
-            /*Image(
-
-            )*/
-            Button(onClick = navigateToGameScreen){ Text("New Game") }
-            Button(onClick = navigateToSettingScreen){ Text("Settings") }
+//            Image(
+//                painter = painterResource(Res.drawable.clefairy),
+//                contentDescription = null
+//            )
+            Button(onClick = { navController.navigate("GameScreen") }){ Text("New Game") }
+            Button(onClick = { navController.navigate("SettingScreen") }){ Text("Settings") }
         }
     }
 }

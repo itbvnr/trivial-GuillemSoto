@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 
 @Composable
-fun ResultScreen(){
+fun ResultScreen(navController: NavHostController){
     Box(modifier = Modifier.fillMaxSize()){
         Column {
-            Text("YourScore")
-            //Variable con el score
+            Text("5")
         }
     }
 }
