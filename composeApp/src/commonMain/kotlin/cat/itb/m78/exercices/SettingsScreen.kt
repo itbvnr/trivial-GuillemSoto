@@ -8,16 +8,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 
 @Composable
-fun SettingsScreen(navController: NavHostController){
+fun SettingsScreen(onBackToMenu: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()){
         Column {
-            Row {
-                Text("Difficulty")
-                //Desplegable amb les dificultats
-            }
             Row {
                 Text("Rounds")
                 Column {
@@ -26,11 +21,7 @@ fun SettingsScreen(navController: NavHostController){
                     Button(onClick = { }) { Text("15") }
                 }
             }
-            Row {
-                Text("Time per round")
-                //Barra per ajustar temps
-            }
-            Button(onClick = { navController.popBackStack() }) {
+            Button(onClick = { onBackToMenu() }) {
                 Text("Back")
             }
         }
