@@ -7,33 +7,37 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import cat.itb.m78.exercices.theme.AppTheme
 
 sealed interface Practica {
-    object Menu : Practica
-    object Question : Practica
-    object Settings : Practica
-    object Result : Practica
-
+    object Students : Practica
+    object Faltes : Practica
 }
 class PracticaViewModel : ViewModel() {
-    val screenState = mutableStateOf<Practica>(Practica.Menu)
-    var score = mutableStateOf(0)
+    val screenState = mutableStateOf<Practica>(Practica.Students)
+    var faltes = mutableStateOf("")
 
     fun navigateTo(screen: Practica) {
-        if (screen == Practica.Menu) {
-            score.value = 0
-        }
         screenState.value = screen
     }
 
-    fun setScore(newScore: Int) {
+    /*fun setScore(newScore: Int) {
         score.value = newScore
-    }
+    }*/
 }
 @Composable
 fun App() = AppTheme {
     val viewModel = viewModel<PracticaViewModel>(   )
     val screen = viewModel.screenState.value
+    when(screen) {
+        Practica.Students -> StudentScreen(
+            onFaltesClick = { viewModel.navigateTo(Practica.Faltes) },
+            faltes = viewModel.faltes
+        )
+        Practica.Faltes -> FaltesScreen(
+            onBackToStudents = { viewModel.navigateTo(Practica.Students) },
+            faltes = viewModel.faltes
+        )
+    }
 
-    when (screen) {
+    /*when (screen) {
         Practica.Menu -> MenuScreen(
             onSettingsClick = { viewModel.navigateTo(Practica.Settings) },
             onQuestionClick = {viewModel.navigateTo(Practica.Question)}
@@ -47,5 +51,5 @@ fun App() = AppTheme {
         Practica.Question -> Question(gotoResults = { correctAnswers:Int ->
             viewModel.setScore(correctAnswers)
             viewModel.navigateTo(Practica.Result)})
-    }
+    }*/
 }
